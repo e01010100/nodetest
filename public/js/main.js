@@ -7,28 +7,52 @@
  * Main AngularJS Web Application
  */
 var app = angular.module('tutorialWebApp', [
-  'ngRoute',
+  'ui.router',
   'ngAnimate', 'ui.bootstrap'
 ]);
 
 /**
  * Configure the Routes
  */
-app.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider
+app.config( ['$locationProvider', '$stateProvider', function ($locationProvider, $stateProvider) {
+    $stateProvider
+        .state('home', {
+            url:'/',
+            templateUrl: "partials/home.html",
+            controller: "PageCtrl"
+        })
+        .state('about', {
+            url:'/about',
+            templateUrl: "partials/about.html",
+            controller: "PageCtrl"
+        })
+        .state('faq', {
+            url:'/faq',
+            templateUrl: "partials/faq.html",
+            controller: "PageCtrl"
+        })
+        .state('pricing', {
+            url:'/pricing',
+            templateUrl: "partials/pricing.html",
+            controller: "PageCtrl"
+        })
+    ;
     // Home
-    .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
-    // Pages
-    .when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
-    .when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"})
-    .when("/pricing", {templateUrl: "partials/pricing.html", controller: "PageCtrl"})
-    .when("/services", {templateUrl: "partials/services.html", controller: "PageCtrl"})
-    .when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
-    // Blog
-    .when("/blog", {templateUrl: "partials/blog.html", controller: "BlogCtrl"})
-    .when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"})
-    // else 404
-    .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
+    // .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
+    // // Pages
+    // .when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
+    // .when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"})
+    // .when("/pricing", {templateUrl: "partials/pricing.html", controller: "PageCtrl"})
+    // .when("/services", {templateUrl: "partials/services.html", controller: "PageCtrl"})
+    // .when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
+    // // Blog
+    // .when("/blog", {templateUrl: "partials/blog.html", controller: "BlogCtrl"})
+    // .when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"})
+    // // else 404
+    // .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
+
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
 }]);
 
 /**
